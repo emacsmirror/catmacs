@@ -28,7 +28,8 @@
   :group 'catmacs)
 
 (defcustom catmacs-accept-timeout 0.1
-  "Sets the timeout for accepting process output.  See `accept-process-output' for details."
+  "Sets the timeout for accepting process output.  See `accept-process-output' \
+for details."
   :type 'float
   :group 'catmacs)
 
@@ -38,6 +39,7 @@
 
 (defun catmacs-send-serial (command)
   "Send a COMMAND string over serial port."
+  (interactive "sCAT Command:")
   (with-temp-buffer
     (let ((process (make-serial-process
 		    :port catmacs-serial-port
