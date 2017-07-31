@@ -66,16 +66,32 @@ for details."
     (message "CAT response = [%s]" (buffer-string))
     (buffer-string)))
 
+;;
+;; CAT Commands.
+;;
+;; Reference: FT-991A Cat Operation Reference Manual
+;;
+
+;;
+;; BD
+;;
 
 (defun catmacs-band-down ()
   "BD - Band Down."
   (interactive)
   (catmacs-send-serial "BD0;"))
 
+;;
+;; BU
+;;
+
 (defun catmacs-band-up ()
   "BU - Band Up."
   (interactive)
   (catmacs-send-serial "BU0;"))
+;;
+;; FA
+;;
 
 (defun catmacs-fa-set (frequency)
   "FA - Set - Frequency VFO-A.
@@ -95,11 +111,24 @@ Reads the FREQUENCY (Hz) of VFO-A"
     (setq cmd (format "FA;"))
     (setq response (catmacs-send-serial cmd))
     (message "fa [%s]" response)
-    response
     (string-to-number (substring response 2 -2))
     )
   )
 
+;;
+;; RA - FIXME: Incomplete
+;;
+(defun catmacs-ra-set ()
+  "Foo."
+  (interactive)
+  (let (cmd response choice p1 p2)
+    (setq cmd (format "RA%1d%1d" p1 p2))
+    )
+  )
+
+;;
+;; Testing
+;;
 (defun catmacs-test ()
   "For test, execute some catmacs commands."
   (catmacs-send-serial "FA018744728;")
