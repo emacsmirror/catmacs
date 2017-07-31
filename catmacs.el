@@ -50,10 +50,11 @@ for details."
                      :coding 'no-conversion
                      :buffer (current-buffer))
             )
-      (message "process = %s" process)
+      (message "process = [%s]" process)
       (setq response (catmacs-send-process process command))
-      (message "response = %s" response)
+      (message "process response = [%s]" response)
       (delete-process process)
+      response
       )))
 
 (defun catmacs-send-process (process command)
@@ -62,12 +63,49 @@ for details."
   (with-current-buffer (process-buffer process)
     (process-send-string process command)
     (accept-process-output process catmacs-accept-timeout)
-    (message "buffer-string = [%s]" (buffer-string))
+    (message "CAT response = [%s]" (buffer-string))
     (buffer-string)))
 
-(catmacs-send-serial "FA019744728;")
 
-(catmacs-send-serial "BD0;")
+(defun catmacs-band-down ()
+  "BD - Band Down."
+  (interactive)
+  (catmacs-send-serial "BD0;"))
+
+(defun catmacs-band-up ()
+  "BU - Band Up."
+  (interactive)
+  (catmacs-send-serial "BU0;"))
+
+(defun catmacs-fa-set (frequency)
+  "FA - Set - Frequency VFO-A.
+Sets the FREQUENCY (Hz) of VFO-A"
+  (interactive "nVFO-A Frequency: ")
+  (let (cmd)
+    (setq cmd (format "FA%09d;" (* 1000 frequency)))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+(defun catmacs-fa-read ()
+  "FA - Read - Frequency VFO-A.
+Reads the FREQUENCY (Hz) of VFO-A"
+  (interactive)
+  (let (cmd response)
+    (setq cmd (format "FA;"))
+    (setq response (catmacs-send-serial cmd))
+    (message "fa [%s]" response)
+    response
+    (string-to-number (substring response 2 -2))
+    )
+  )
+
+(defun catmacs-test ()
+  "For test, execute some catmacs commands."
+  (catmacs-send-serial "FA018744728;")
+  (catmacs-send-serial "BD0;")
+  (catmacs-fa-read)
+  )
 
 (provide 'catmacs)
 ;;; catmacs.el ends here
