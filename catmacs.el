@@ -41,17 +41,20 @@ for details."
   "Send a COMMAND string over serial port."
   (interactive "sCAT Command:")
   (with-temp-buffer
-    (let ((process (make-serial-process
-		    :port catmacs-serial-port
-		    :speed catmacs-baud-rate
-                    :name "rig"
-                    :flowcontrol 'hw
-                    :coding 'no-conversion
-		    :buffer (current-buffer)))
-	  result)
-      (catmacs-send-process process command)
+    (let ( process response)
+      (setq process (make-serial-process
+                     :port catmacs-serial-port
+                     :speed catmacs-baud-rate
+                     :name "rig"
+                     :flowcontrol 'hw
+                     :coding 'no-conversion
+                     :buffer (current-buffer))
+            )
+      (message "process = %s" process)
+      (setq response (catmacs-send-process process command))
+      (message "response = %s" response)
       (delete-process process)
-      result)))
+      )))
 
 (defun catmacs-send-process (process command)
   "Send to a specified PROCESS, a COMMAND string."
@@ -59,11 +62,12 @@ for details."
   (with-current-buffer (process-buffer process)
     (process-send-string process command)
     (accept-process-output process catmacs-accept-timeout)
+    (message "buffer-string = [%s]" (buffer-string))
     (buffer-string)))
 
-(catmacs-send-serial "FA018344628;")
+(catmacs-send-serial "FA019744728;")
 
-;;(catmacs-send-serial "FA;")
+(catmacs-send-serial "BD0;")
 
 (provide 'catmacs)
 ;;; catmacs.el ends here
