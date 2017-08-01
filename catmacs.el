@@ -387,6 +387,7 @@ Sets the state of the VFO-A Dial Lock."
   )
 
 
+
 ;;
 ;; NB
 ;;
@@ -518,6 +519,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 (defun catmacs-test ()
   "For test, execute some catmacs commands."
   (interactive)
+  (catmacs-da-set 2 15)
   (catmacs-send-serial "FA018744728;")
   (sleep-for 3)
   (catmacs-send-serial "BU0;")
@@ -527,8 +529,8 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (catmacs-sq-set 0)
   (sleep-for 3)
   (catmacs-fa-set 1377)
+  (catmacs-da-set 1 0)
   )
 
 (provide 'catmacs)
 ;;; catmacs.el ends here
-(catmacs-ed-set 0 13)
