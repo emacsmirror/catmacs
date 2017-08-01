@@ -1,16 +1,25 @@
 ;;; catmacs --- Prototyping simple CAT interface for Yaesu FT991A
+
 ;;
-;;  Copyright © 2017 Frank Singleton
+;; Copyright (C) 2017 Frank Singleton
 ;;
+;; Author: Frank Singleton <b17flyboy@gmail.com>
+;; Version: 0.1
+;; Keywords: catmacs, radio, control, cat, yaesu, ft991
+;; URL: https://pymaximus@bitbucket.org/pymaximus/catmacs.git
+;;
+
 ;;; Commentary:
+
 ;;
 ;;  Provides an Emacs CAT client for controlling Yaesu FT991A.
 ;;
 ;;  Under construction... eventually it will support a Major Mode
 ;;
 ;;
+
 ;;; Custom:
-;;
+
 
 (defgroup catmacs nil
   "CAT client for Yaesu FT-991A."
