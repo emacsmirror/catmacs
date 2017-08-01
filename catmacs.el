@@ -171,6 +171,59 @@ for details."
   "BU - Set - Band Up."
   (interactive)
   (catmacs-send-serial "BU0;"))
+
+;;
+;; CH
+;;
+
+(defun catmacs-ch-set ()
+  "CH - Set - Channel Up/Down.
+Sets the memory channel up or down."
+  (interactive)
+  (let (cmd choice p1)
+    (setq choice (completing-read "Memory Channel Direction: " '("up" "down")))
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"up" (setq p1 0))
+      ('"down" (setq p1 1))
+      ;; default is up
+      (_ (setq p1 0))
+      )
+    (message "%s" p1)
+    (setq cmd (format "CH%1d;" p1))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
+;;
+;; DA
+;;
+
+(defun catmacs-da-set (led_level tft_level)
+  "DA - Set - Dimmer.
+Sets the LED_LEVEL and TFT_LEVEL brightness level."
+  (interactive "nLED Level (1-2): \nnTFT Level (0-15): ")
+  (let (cmd)
+    (setq cmd (format "DA00%02d%02d;" led_level tft_level))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
+;;
+;; DN
+;;
+(defun catmacs-dn-set ()
+  "DN - Set - Microphone Down."
+  (interactive)
+  (let (cmd)
+    (setq cmd (format "DN;"))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
 ;;
 ;; FA
 ;;
@@ -367,8 +420,22 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;;
 (defun catmacs-sv-set ()
   "SV - Set - Swap VFO."
+  (interactive)
   (let (cmd)
     (setq cmd (format "SV;"))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
+;;
+;; UP
+;;
+(defun catmacs-up-set ()
+  "UP - Set - Microphone UP."
+  (interactive)
+  (let (cmd)
+    (setq cmd (format "UP;"))
     (catmacs-send-serial cmd)
     )
   )
