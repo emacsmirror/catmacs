@@ -440,6 +440,11 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   )
 
 
+;;
+;; This example shows both interactive and non-interactive
+;; functions. Still thinking about this. Low level API should
+;; be non interactive ideally, and then we can build interactive function on top
+;; of that ?
 
 ;;
 ;; RA
@@ -457,11 +462,13 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
       (_ (setq p2 0))
       )
     (setq p1 0)
-    (message "%s" p1)
-    (message "%s" p2)
-    (setq cmd (format "RA%1d%1d;" p1 p2))
-    (catmacs-send-serial cmd)
+    (catmacs-ra-set-ni p1 p2)
     )
+  )
+
+(defun catmacs-ra-set-ni (p1 p2)
+  "RA - Set - RF Attenuator (P1 P2)."
+  (catmacs-send-serial (format "RA%1d%1d;" p1 p2))
   )
 
 ;;
@@ -525,6 +532,10 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (catmacs-send-serial "BU0;")
   (sleep-for 3)
   (catmacs-fa-read)
+  (sleep-for 3)
+  (call-interactively 'catmacs-ra-set "on")
+  (sleep-for 3)
+  (catmacs-ra-set-ni 0 1)
   (sleep-for 3)
   (catmacs-sq-set 0)
   (sleep-for 3)
