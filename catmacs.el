@@ -344,6 +344,49 @@ Sets the state of the VFO-A Dial Lock."
     )
   )
 
+
+;;
+;; MD
+;;
+
+(defun catmacs-md-set ()
+  "MD - Set - Operating Mode."
+  (interactive)
+  (let (cmd choice p1 p2)
+    (setq choice (completing-read
+                  "Select Mode: " '("LSB" "USB" "CW-U"
+                                    "FM" "AM" "RTTY-LSB"
+                                    "CW-L" "DATA-LSB" "RTTY-USB"
+                                    "DATA-FM" "FM-N" "DATA-USB" "AM-N"
+                                    "C4FM" )))
+
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"LSB" (setq p2 1))
+      ('"USB" (setq p2 2))
+      ('"CW-U" (setq p2 3))
+      ('"FM" (setq p2 4))
+      ('"AM" (setq p2 5))
+      ('"RTTY-LSB" (setq p2 6))
+      ('"CW-L" (setq p2 7))
+      ('"DATA-LSB" (setq p2 8))
+      ('"RTTY-USB" (setq p2 9))
+      ('"DATA-FM" (setq p2 "A"))
+      ('"FM-N" (setq p2 "B"))
+      ('"DATA-USB" (setq p2 "C"))
+      ('"AM-N" (setq p2 "D"))
+      ('"C4FM" (setq p2 "E"))
+      ;; default is AM
+      (_ (setq p2 5))
+      )
+    (setq p1 0)
+    (setq cmd (format "MD%1d%s;" p1 p2))
+    (message "cmd = [%s]" cmd)
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
 ;;
 ;; NB
 ;;
@@ -477,7 +520,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (interactive)
   (catmacs-send-serial "FA018744728;")
   (sleep-for 3)
-  (catmacs-send-serial "BD0;")
+  (catmacs-send-serial "BU0;")
   (sleep-for 3)
   (catmacs-fa-read)
   (sleep-for 3)
@@ -488,3 +531,4 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 
 (provide 'catmacs)
 ;;; catmacs.el ends here
+(catmacs-ed-set 0 13)
