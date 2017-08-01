@@ -115,6 +115,58 @@ Reads the FREQUENCY (Hz) of VFO-A"
     )
   )
 
+
+;;
+;; NB
+;;
+
+(defun catmacs-nb-set ()
+  "Set Noise Blanker STATUS."
+  (interactive)
+  (let (cmd choice p1 p2)
+    (setq choice (completing-read "Select:" '("on" "off")))
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"on" (setq p2 1))
+      ('"off" (setq p2 0))
+      )
+    (setq p1 0)
+    (message "%s" p1)
+    (message "%s" p2)
+    (setq cmd (format "NB%1d%1d" p1 p2))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+;;
+;; NL
+;;
+
+(defun catmacs-nl-set (level)
+  "Set Noise Blanker LEVEL."
+  (interactive "nNoise Blanker Level (0-10): ")
+  (let (cmd)
+    (setq cmd (format "NL0%03d;" level))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+;;
+;; QR
+;;
+
+(defun catmacs-qr-set ()
+  "QR - Set - QMB recall.
+Sets QMB Recall command.  This cycles through the 5 QMB memories."
+  (interactive)
+  (let (cmd)
+    (setq cmd (format "QR;" ))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
+
 ;;
 ;; RA - FIXME: Incomplete
 ;;
@@ -123,6 +175,30 @@ Reads the FREQUENCY (Hz) of VFO-A"
   (interactive)
   (let (cmd response choice p1 p2)
     (setq cmd (format "RA%1d%1d" p1 p2))
+    )
+  )
+
+;;
+;; RG
+;;
+(defun catmacs-rg-set (gain)
+  "Set RF GAIN."
+  (interactive "nRF Gain (0-255): ")
+  (let (cmd)
+    (setq cmd (format "RG0%03d;" gain))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+;;
+;; SQ
+;;
+(defun catmacs-sq-set (level)
+  "Set Squelch LEVEL."
+  (interactive "nSquelch Level: (0-100): ")
+  (let (cmd)
+    (setq cmd (format "SQ0%03d;" level))
+    (catmacs-send-serial cmd)
     )
   )
 
