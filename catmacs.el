@@ -197,6 +197,70 @@ Reads the FREQUENCY (Hz) of VFO-A"
     )
   )
 
+;;
+;; FS
+;;
+
+(defun catmacs-fs-set ()
+  "FS - Set - Fast Step.
+Sets the state of the VFO-A Fast Key."
+  (interactive)
+  (let (cmd choice p1)
+    (setq choice (completing-read "VFO-A Fast Key: " '("on" "off")))
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"on" (setq p1 1))
+      ('"off" (setq p1 0))
+      ;; default is off
+      (_ (setq p1 0))
+      )
+    (message "%s" p1)
+    (setq cmd (format "FS%1d;" p1))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+
+;;
+;; IF
+;;
+;; TODO: How to present this data
+;;
+
+(defun catmacs-if-read ()
+  "IF - Read - Information.
+Reads information from the radio."
+  (interactive)
+  (let (cmd response)
+    (setq cmd (format "IF;"))
+    (setq response (catmacs-send-serial cmd))
+    (message "information [%s]" response)
+    (substring response 2 -1)
+    )
+  )
+
+;;
+;; LK
+;;
+
+(defun catmacs-lk-set ()
+  "LK - Set - Lock.
+Sets the state of the VFO-A Dial Lock."
+  (interactive)
+  (let (cmd choice p1)
+    (setq choice (completing-read "VFO-A Dial Lock: " '("on" "off")))
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"on" (setq p1 1))
+      ('"off" (setq p1 0))
+      ;; default is off
+      (_ (setq p1 0))
+      )
+    (message "%s" p1)
+    (setq cmd (format "LK%1d;" p1))
+    (catmacs-send-serial cmd)
+    )
+  )
 
 ;;
 ;; NB
@@ -206,7 +270,7 @@ Reads the FREQUENCY (Hz) of VFO-A"
   "Set Noise Blanker STATUS."
   (interactive)
   (let (cmd choice p1 p2)
-    (setq choice (completing-read "Select:" '("on" "off")))
+    (setq choice (completing-read "Noise Blanker: " '("on" "off")))
     (message "choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p2 1))
@@ -255,10 +319,10 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;; RA
 ;;
 (defun catmacs-ra-set ()
-  "Foo."
+  "RA - Set - RF Attenuator."
   (interactive)
   (let (cmd choice p1 p2)
-    (setq choice (completing-read "Select:" '("on" "off")))
+    (setq choice (completing-read "RF Attenuator: " '("on" "off")))
     (message "choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p2 1))
