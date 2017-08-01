@@ -73,20 +73,93 @@ for details."
 ;;
 
 ;;
+;; AB
+;;
+
+(defun catmacs-ab-set ()
+  "AB - Set - VFO-A to VFO-B."
+  (interactive)
+  (catmacs-send-serial "AB;"))
+
+;;
+;; AI
+;;
+
+(defun catmacs-ai-set ()
+  "AI - Set - Auto Information STATE."
+  (interactive)
+  (let (cmd choice p1)
+    (setq choice (completing-read "Select:" '("on" "off")))
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"on" (setq p1 1))
+      ('"off" (setq p1 0))
+      ;; default is off
+      (_ (setq p1 0))
+      )
+    (message "%s" p1)
+    (setq cmd (format "AI%1d;" p1))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+;;
 ;; BD
 ;;
 
-(defun catmacs-band-down ()
-  "BD - Band Down."
+(defun catmacs-bd-set ()
+  "BD - Set - Band Down."
   (interactive)
   (catmacs-send-serial "BD0;"))
+
+;;
+;; BS
+;;
+
+(defun catmacs-bs-set ()
+  "BS - Set - Band Select."
+  (interactive)
+  (let (cmd choice p1)
+    (setq choice (completing-read
+                  "Select Band: " '("1.8MHz" "3.5MHz" "7MHz"
+                                    "10MHz" "14MHz" "18MHz"
+                                    "21MHz" "24.5MHz" "28MHz"
+                                    "50MHz" "GEN" "MW" "AIR"
+                                    "144MHz" "430MHz")))
+
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"1.8MHz" (setq p1 0))
+      ('"3.5Mhz" (setq p1 1))
+      ('"7MHz" (setq p1 3))
+      ('"10MHz" (setq p1 4))
+      ('"14MHz" (setq p1 5))
+      ('"18MHz" (setq p1 6))
+      ('"21MHz" (setq p1 7))
+      ('"24.5MHz" (setq p1 8))
+      ('"28MHz" (setq p1 9))
+      ('"50MHz" (setq p1 10))
+      ('"GEN" (setq p1 11))
+      ('"MW" (setq p1 12))
+      ('"AIR" (setq p1 14))
+      ('"144MHz" (setq p1 15))
+      ('"430MHz" (setq p1 16))
+      ;; default is MW
+      (_ (setq p1 12))
+      )
+    (message "%s" p1)
+    (setq cmd (format "BS%02d;" p1))
+    (message "cmd = [%s]" cmd)
+    (catmacs-send-serial cmd)
+    )
+  )
 
 ;;
 ;; BU
 ;;
 
-(defun catmacs-band-up ()
-  "BU - Band Up."
+(defun catmacs-bu-set ()
+  "BU - Set - Band Up."
   (interactive)
   (catmacs-send-serial "BU0;"))
 ;;
