@@ -342,7 +342,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;; RG
 ;;
 (defun catmacs-rg-set (gain)
-  "Set RF GAIN."
+  "RG - Set - RF GAIN."
   (interactive "nRF Gain (0-255): ")
   (let (cmd)
     (setq cmd (format "RG0%03d;" gain))
@@ -354,10 +354,21 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;; SQ
 ;;
 (defun catmacs-sq-set (level)
-  "Set Squelch LEVEL."
+  "SQ - Set - Squelch LEVEL."
   (interactive "nSquelch Level: (0-100): ")
   (let (cmd)
     (setq cmd (format "SQ0%03d;" level))
+    (catmacs-send-serial cmd)
+    )
+  )
+
+;;
+;; SV
+;;
+(defun catmacs-sv-set ()
+  "SV - Set - Swap VFO."
+  (let (cmd)
+    (setq cmd (format "SV;"))
     (catmacs-send-serial cmd)
     )
   )
@@ -367,9 +378,16 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;;
 (defun catmacs-test ()
   "For test, execute some catmacs commands."
+  (interactive)
   (catmacs-send-serial "FA018744728;")
+  (sleep-for 3)
   (catmacs-send-serial "BD0;")
+  (sleep-for 3)
   (catmacs-fa-read)
+  (sleep-for 3)
+  (catmacs-sq-set 0)
+  (sleep-for 3)
+  (catmacs-fa-set 1377)
   )
 
 (provide 'catmacs)
