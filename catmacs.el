@@ -129,6 +129,8 @@ Reads the FREQUENCY (Hz) of VFO-A"
     (pcase choice
       ('"on" (setq p2 1))
       ('"off" (setq p2 0))
+      ;; default is off
+      (_ (setq p2 0))
       )
     (setq p1 0)
     (message "%s" p1)
@@ -168,13 +170,25 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 
 
 ;;
-;; RA - FIXME: Incomplete
+;; RA
 ;;
 (defun catmacs-ra-set ()
   "Foo."
   (interactive)
-  (let (cmd response choice p1 p2)
-    (setq cmd (format "RA%1d%1d" p1 p2))
+  (let (cmd choice p1 p2)
+    (setq choice (completing-read "Select:" '("on" "off")))
+    (message "choice = [%s]" choice)
+    (pcase choice
+      ('"on" (setq p2 1))
+      ('"off" (setq p2 0))
+      ;; default is off
+      (_ (setq p2 0))
+      )
+    (setq p1 0)
+    (message "%s" p1)
+    (message "%s" p2)
+    (setq cmd (format "RA%1d%1d;" p1 p2))
+    (catmacs-send-serial cmd)
     )
   )
 
