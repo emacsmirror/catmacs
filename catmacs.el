@@ -543,5 +543,17 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (catmacs-da-set 1 0)
   )
 
+;;
+;; catmacs key bindings, awesomee "C-c m" is free.
+;;
+(global-set-key (kbd "C-c m f") 'catmacs-fa-set)
+(global-set-key (kbd "C-c m m") 'catmacs-md-set)
+(global-set-key (kbd "C-c m q") 'catmacs-qr-set)
+(global-set-key (kbd "C-c m e d") 'catmacs-ed-set)
+(global-set-key (kbd "C-c m e u") 'catmacs-eu-set)
+(global-set-key (kbd "C-c m a") 'catmacs-ra-set)
+(global-set-key (kbd "C-c m l") 'catmacs-lk-set)
+
+
 (provide 'catmacs)
 ;;; catmacs.el ends here
