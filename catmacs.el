@@ -544,7 +544,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   )
 
 ;;
-;; catmacs key bindings, awesomee "C-c m" is free.
+;; catmacs key bindings, awesome "C-c m" is free.
 ;;
 (global-set-key (kbd "C-c m f") 'catmacs-fa-set)
 (global-set-key (kbd "C-c m m") 'catmacs-md-set)
