@@ -269,6 +269,12 @@ Sets the FREQUENCY (Hz) of VFO-A"
     )
   )
 
+(defun catmacs-fa-set-ni (p1)
+  "FA - Set - Frequency VFO-A P1."
+  (catmacs-send-serial (format "FA%09d;" p1))
+  )
+
+
 (defun catmacs-fa-read ()
   "FA - Read - Frequency VFO-A.
 Reads the FREQUENCY (Hz) of VFO-A"
@@ -382,10 +388,13 @@ Sets the state of the VFO-A Dial Lock."
       (_ (setq p2 5))
       )
     (setq p1 0)
-    (setq cmd (format "MD%1d%s;" p1 p2))
-    (message "cmd = [%s]" cmd)
-    (catmacs-send-serial cmd)
+    (catmacs-md-set-ni p1 p2)
     )
+  )
+
+(defun catmacs-md-set-ni (p1 p2)
+  "MD - Set - Operating Mode - P1 P2."
+  (catmacs-send-serial (format "MD%1d%s;" p1 p2))
   )
 
 
@@ -526,22 +535,24 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;; Testing
 ;;
 (defun catmacs-test ()
-  "For test, execute some catmacs commands."
+  "For test, execute some catmacs-xyz-set-ni commands."
   (interactive)
+  ;; set brightness
   (catmacs-da-set 2 15)
-  (catmacs-send-serial "FA018744728;")
-  (sleep-for 3)
-  (catmacs-send-serial "BU0;")
-  (sleep-for 3)
-  (catmacs-fa-read)
-  (sleep-for 3)
-  (call-interactively 'catmacs-ra-set "on")
-  (sleep-for 3)
-  (catmacs-ra-set-ni 0 1)
-  (sleep-for 3)
-  (catmacs-sq-set 0)
-  (sleep-for 3)
-  (catmacs-fa-set 1377)
+  ;; set some frequencies and modes
+  (message "Setting frequency to 1377 kHz and mode to AM")
+  (catmacs-md-set-ni 0 5)
+  (catmacs-fa-set-ni 1377000)
+  (sleep-for 5)
+  (message "Setting frequency to 531 kHz")
+  (catmacs-fa-set-ni 531000)
+  (sleep-for 5)
+  (message "Setting frequency to 15 MHz, mode to USB")
+  (catmacs-md-set-ni 0 2)
+  (catmacs-fa-set-ni 15000000)
+  (sleep-for 5)
+
+  ;; reset display brightness to lower settings
   (catmacs-da-set 1 0)
   )
 
