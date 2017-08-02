@@ -5,7 +5,7 @@
 ;;
 ;; Author: Frank Singleton <b17flyboy@gmail.com>
 ;; Version: 0.1
-;; Keywords: catmacs, radio, control, cat, yaesu, ft991
+;; Keywords: catmacs, radio, control, cat, yaesu, ft991a
 ;; URL: https://pymaximus@bitbucket.org/pymaximus/catmacs.git
 ;;
 
