@@ -80,6 +80,8 @@ for details."
 ;;
 ;; Reference: FT-991A Cat Operation Reference Manual
 ;;
+;; NOTE: This is just a useful(?) subset for now.
+;;
 
 ;;
 ;; AB
