@@ -16,7 +16,8 @@
 ;;
 ;;  Under construction... eventually it will support a Major Mode
 ;;
-;;
+;; FIXME: choice and interactive don't handle non interactive invocation
+;;        very well.
 
 ;;; Custom:
 
@@ -494,6 +495,11 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
     )
   )
 
+(defun catmacs-rg-set-ni (p1 p2)
+  "RG - Set - RF GAIN P1 P2."
+  (catmacs-send-serial (format "RG%1d%03d;" p1 p2))
+  )
+
 ;;
 ;; SQ
 ;;
@@ -539,6 +545,8 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (interactive)
   ;; set brightness
   (catmacs-da-set 2 15)
+  ;; set RF attenuator off
+  (catmacs-ra-set-ni 0 0)
   ;; set some frequencies and modes
   (message "Setting frequency to 1377 kHz and mode to AM")
   (catmacs-md-set-ni 0 5)
@@ -547,9 +555,13 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (message "Setting frequency to 531 kHz")
   (catmacs-fa-set-ni 531000)
   (sleep-for 5)
-  (message "Setting frequency to 15 MHz, mode to USB")
+  (message "Setting frequency to 15 MHz, mode to USB, RF Attenuator ON")
   (catmacs-md-set-ni 0 2)
   (catmacs-fa-set-ni 15000000)
+  (catmacs-ra-set-ni 0 1)
+  (sleep-for 5)
+  (message "Setting RF Attenuator OFF")
+  (catmacs-ra-set-ni 0 0)
   (sleep-for 5)
 
   ;; reset display brightness to lower settings
