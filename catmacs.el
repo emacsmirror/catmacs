@@ -94,6 +94,21 @@ for details."
   (catmacs-send-serial "AB;"))
 
 ;;
+;; AG
+;;
+
+(defun catmacs-ag-set (gain)
+  "AF - Set - AF GAIN (0-255)."
+  (interactive "nAF Gain (0-255): ")
+  (catmacs-send-serial (format "AG0%03d;" gain))
+  )
+
+(defun catmacs-ag-set-ni (p1 p2)
+  "AF - Set - AF GAIN P1 P2."
+  (catmacs-send-serial (format "AG%1d%03d;" p1 p2))
+  )
+
+;;
 ;; AI
 ;;
 
@@ -547,6 +562,8 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (catmacs-da-set 2 15)
   ;; set RF attenuator off
   (catmacs-ra-set-ni 0 0)
+  ;; set AF gain to 50 (0-255)
+  (catmacs-ag-set-ni 0 50)
   ;; set some frequencies and modes
   (message "Setting frequency to 1377 kHz and mode to AM")
   (catmacs-md-set-ni 0 5)
@@ -579,6 +596,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 (global-set-key (kbd "C-c m a") 'catmacs-ra-set)
 (global-set-key (kbd "C-c m l") 'catmacs-lk-set)
 (global-set-key (kbd "C-c m b") 'catmacs-bs-set)
+(global-set-key (kbd "C-c m v") 'catmacs-ag-set)
 
 
 (provide 'catmacs)
