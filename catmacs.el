@@ -553,6 +553,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 (global-set-key (kbd "C-c m e u") 'catmacs-eu-set)
 (global-set-key (kbd "C-c m a") 'catmacs-ra-set)
 (global-set-key (kbd "C-c m l") 'catmacs-lk-set)
+(global-set-key (kbd "C-c m b") 'catmacs-bs-set)
 
 
 (provide 'catmacs)
