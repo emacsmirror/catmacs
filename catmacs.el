@@ -5,9 +5,11 @@
 ;;
 ;; Author: Frank Singleton <b17flyboy@gmail.com>
 ;; Version: 0.1.1
-;; Keywords: catmacs, radio, control, cat, yaesu, ft991a
+;; Keywords: comm, hardware
 ;; URL: https://pymaximus@bitbucket.org/pymaximus/catmacs.git
-;;
+;; Package-Requires: ((emacs "24"))
+
+;; This file is not part of GNU Emacs.
 
 ;; This file is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
