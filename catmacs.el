@@ -1,4 +1,4 @@
-;;; catmacs --- Prototyping simple CAT interface for Yaesu FT991A
+;;; catmacs --- Simple CAT interface for Yaesu FT991A
 
 ;;
 ;; Copyright (C) 2017 Frank Singleton
