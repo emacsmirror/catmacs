@@ -6,7 +6,7 @@
 ;; Author: Frank Singleton <b17flyboy@gmail.com>
 ;; Version: 0.1.1
 ;; Keywords: comm, hardware
-;; URL: https://pymaximus@bitbucket.org/pymaximus/catmacs.git
+;; URL: https://bitbucket.org/pymaximus/catmacs
 ;; Package-Requires: ((emacs "24"))
 
 ;; This file is not part of GNU Emacs.
