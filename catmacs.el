@@ -1,23 +1,59 @@
-;;; catmacs --- Simple CAT interface for Yaesu FT991A
+;;; catmacs.el --- Simple CAT interface for Yaesu FT991A
 
 ;;
 ;; Copyright (C) 2017 Frank Singleton
 ;;
 ;; Author: Frank Singleton <b17flyboy@gmail.com>
-;; Version: 0.1
+;; Version: 0.1.1
 ;; Keywords: catmacs, radio, control, cat, yaesu, ft991a
 ;; URL: https://pymaximus@bitbucket.org/pymaximus/catmacs.git
 ;;
 
+;;; The MIT License:
+
+;; http://en.wikipedia.org/wiki/MIT_License
+;;
+;; Permission is hereby granted, free of charge, to any person obtaining
+;; a copy of this software and associated documentation files (the
+;; "Software"), to deal in the Software without restriction, including
+;; without limitation the rights to use, copy, modify, merge, publish,
+;; di Bans Selectstribute, sublicense, and/or sell copies of the Software, and to
+;; permit persons to whom the Software is furnished to do so, subject to
+;; the following conditions:
+
+;; The above copyright notice and this permission notice shall be
+;; included in all copies or substantial portions of the Software.
+
+;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+;; IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+;; CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+;; TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+;; SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 ;;; Commentary:
 
 ;;
-;;  Provides an Emacs CAT client for controlling Yaesu FT991A.
+;; Provides an Emacs CAT client for controlling Yaesu FT991A.
 ;;
-;;  Under construction... eventually it will support a Major Mode
+;; Under construction... eventually it will support a catmacs Major Mode
 ;;
-;; FIXME: choice and interactive don't handle non interactive invocation
-;;        very well.
+;; Basic stuff works, including ...
+;;
+;; * Frequency
+;; * Mode
+;; * RF Gain
+;; * AF Gain
+;; * RF Attenuator
+;; * QMB Recall
+;; * Band Select
+;; * Band Up/Down
+;; * Encorder Up/Down
+;; * Channel Up/Down
+;; * Noise Blanker
+;; * LED/TFT Dimmer
+;;
 
 ;;; Custom:
 
