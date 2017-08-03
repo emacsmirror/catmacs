@@ -60,20 +60,20 @@ for details."
                      :coding 'no-conversion
                      :buffer (current-buffer))
             )
-      (message "process = [%s]" process)
+      (message "catmacs: process = [%s]" process)
       (setq response (catmacs-send-process process command))
-      (message "process response = [%s]" response)
+      (message "catmacs: process response = [%s]" response)
       (delete-process process)
       response
       )))
 
 (defun catmacs-send-process (process command)
   "Send to a specified PROCESS, a COMMAND string."
-  (message "process = [%s] command = [%s]" process command)
+  (message "catmacs: process = [%s] command = [%s]" process command)
   (with-current-buffer (process-buffer process)
     (process-send-string process command)
     (accept-process-output process catmacs-accept-timeout)
-    (message "CAT response = [%s]" (buffer-string))
+    (message "catmacs: CAT response = [%s]" (buffer-string))
     (buffer-string)))
 
 ;;
@@ -117,14 +117,14 @@ for details."
   (interactive)
   (let (cmd choice p1)
     (setq choice (completing-read "Select:" '("on" "off")))
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p1 1))
       ('"off" (setq p1 0))
       ;; default is off
       (_ (setq p1 0))
       )
-    (message "%s" p1)
+    (message "catmacs: p1 = %s" p1)
     (setq cmd (format "AI%1d;" p1))
     (catmacs-send-serial cmd)
     )
@@ -154,7 +154,7 @@ for details."
                                     "50MHz" "GEN" "MW" "AIR"
                                     "144MHz" "430MHz")))
 
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"1.8MHz" (setq p1 0))
       ('"3.5Mhz" (setq p1 1))
@@ -174,9 +174,8 @@ for details."
       ;; default is MW
       (_ (setq p1 12))
       )
-    (message "%s" p1)
+    (message "catmacs: p1 = %s" p1)
     (setq cmd (format "BS%02d;" p1))
-    (message "cmd = [%s]" cmd)
     (catmacs-send-serial cmd)
     )
   )
@@ -200,14 +199,14 @@ Sets the memory channel up or down."
   (interactive)
   (let (cmd choice p1)
     (setq choice (completing-read "Memory Channel Direction: " '("up" "down")))
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"up" (setq p1 0))
       ('"down" (setq p1 1))
       ;; default is up
       (_ (setq p1 0))
       )
-    (message "%s" p1)
+    (message "catmacs: %s" p1)
     (setq cmd (format "CH%1d;" p1))
     (catmacs-send-serial cmd)
     )
@@ -298,7 +297,6 @@ Reads the FREQUENCY (Hz) of VFO-A"
   (let (cmd response)
     (setq cmd (format "FA;"))
     (setq response (catmacs-send-serial cmd))
-    (message "fa [%s]" response)
     (string-to-number (substring response 2 -2))
     )
   )
@@ -313,14 +311,14 @@ Sets the state of the VFO-A Fast Key."
   (interactive)
   (let (cmd choice p1)
     (setq choice (completing-read "VFO-A Fast Key: " '("on" "off")))
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p1 1))
       ('"off" (setq p1 0))
       ;; default is off
       (_ (setq p1 0))
       )
-    (message "%s" p1)
+    (message "catmacs: %s" p1)
     (setq cmd (format "FS%1d;" p1))
     (catmacs-send-serial cmd)
     )
@@ -340,7 +338,7 @@ Reads information from the radio."
   (let (cmd response)
     (setq cmd (format "IF;"))
     (setq response (catmacs-send-serial cmd))
-    (message "information [%s]" response)
+    (message "catmacs: information [%s]" response)
     (substring response 2 -1)
     )
   )
@@ -355,14 +353,14 @@ Sets the state of the VFO-A Dial Lock."
   (interactive)
   (let (cmd choice p1)
     (setq choice (completing-read "VFO-A Dial Lock: " '("on" "off")))
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p1 1))
       ('"off" (setq p1 0))
       ;; default is off
       (_ (setq p1 0))
       )
-    (message "%s" p1)
+    (message "catmacs: %s" p1)
     (setq cmd (format "LK%1d;" p1))
     (catmacs-send-serial cmd)
     )
@@ -384,7 +382,7 @@ Sets the state of the VFO-A Dial Lock."
                                     "DATA-FM" "FM-N" "DATA-USB" "AM-N"
                                     "C4FM" )))
 
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"LSB" (setq p2 1))
       ('"USB" (setq p2 2))
@@ -424,7 +422,7 @@ Sets the state of the VFO-A Dial Lock."
   (interactive)
   (let (cmd choice p1 p2)
     (setq choice (completing-read "Noise Blanker: " '("on" "off")))
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p2 1))
       ('"off" (setq p2 0))
@@ -432,8 +430,8 @@ Sets the state of the VFO-A Dial Lock."
       (_ (setq p2 0))
       )
     (setq p1 0)
-    (message "%s" p1)
-    (message "%s" p2)
+    (message "catmacs: p1 = %s" p1)
+    (message "catmacs: p2 = %s" p2)
     (setq cmd (format "NB%1d%1d" p1 p2))
     (catmacs-send-serial cmd)
     )
@@ -481,7 +479,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (interactive)
   (let (cmd choice p1 p2)
     (setq choice (completing-read "RF Attenuator: " '("on" "off")))
-    (message "choice = [%s]" choice)
+    (message "catmacs: choice = [%s]" choice)
     (pcase choice
       ('"on" (setq p2 1))
       ('"off" (setq p2 0))
@@ -556,6 +554,9 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;; Testing
 ;;
 (defun catmacs-test ()
+  ;;
+  ;; Sample Set commands
+  ;;
   "For test, execute some catmacs-xyz-set-ni commands."
   (interactive)
   ;; set brightness
@@ -565,21 +566,25 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   ;; set AF gain to 50 (0-255)
   (catmacs-ag-set-ni 0 50)
   ;; set some frequencies and modes
-  (message "Setting frequency to 1377 kHz and mode to AM")
+  (message "catmacs: Setting frequency to 1377 kHz and mode to AM")
   (catmacs-md-set-ni 0 5)
   (catmacs-fa-set-ni 1377000)
   (sleep-for 5)
-  (message "Setting frequency to 531 kHz")
+  (message "catmacs: Setting frequency to 531 kHz")
   (catmacs-fa-set-ni 531000)
   (sleep-for 5)
-  (message "Setting frequency to 15 MHz, mode to USB, RF Attenuator ON")
+  (message "catmacs: Setting frequency to 15 MHz, mode to USB, RF Attenuator ON")
   (catmacs-md-set-ni 0 2)
   (catmacs-fa-set-ni 15000000)
   (catmacs-ra-set-ni 0 1)
   (sleep-for 5)
-  (message "Setting RF Attenuator OFF")
+  (message "catmacs: Setting RF Attenuator OFF")
   (catmacs-ra-set-ni 0 0)
   (sleep-for 5)
+  ;;
+  ;; Sample Read commands
+  ;;
+  (message (format "catmacs: VFO-A Frequency = %d Hz" (catmacs-fa-read)))
 
   ;; reset display brightness to lower settings
   (catmacs-da-set 1 0)
