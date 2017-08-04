@@ -1,11 +1,9 @@
 catmacs
 =======
 
-This is a prototype for an extension to emacs to support control of my **FT991A** Transceiver.
+This is a prototype for an extension to emacs to support control of **Yaesu FT991(A) Transceivers.**
 
-
-Currently a work in progress.
-
+Currently a work in progress, but quite usable.
 
 Output from M-x a catmacs
 
@@ -174,6 +172,26 @@ catmacs: CAT response = []
 catmacs: process response = []
 
 ```
+
+
+Key Bindings
+------------
+There are far more functions than key bindings. The most used functions are tied
+to the following keystrokes.
+
+Current Key bindings
+
+    C-c m f - Set Frequency
+    C-c m m - Set Mode
+    C-c m q - Set QMB Recall
+    C-c m a - Set RF Attentation
+    C-c m l - Set VFO-A Lock
+    C-c m b - Set Band Select
+    C-c m v - Set AF Gain (Volume)
+    C-c m s - Swap VFO
+    C-c m u - Set Encoder Up
+    C-c m d - Set Encoder Down
+
 
 Work is ongoing, but the API is usable for now. Its great to be developing in
 Emacs and be able to tune around the band at the same time, with just a few
