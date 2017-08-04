@@ -1,7 +1,7 @@
 catmacs
 =======
 
-This is a prototype for an extension to emacs to support control of **Yaesu FT991(A) Transceivers.**
+This is an extension to Emacs to support control of **Yaesu FT991(A) Transceivers.**
 
 Currently a work in progress, but quite usable.
 
@@ -174,10 +174,11 @@ catmacs: process response = []
 ```
 
 
-Key Bindings
-------------
-There are far more functions than key bindings. The most used functions are tied
-to the following keystrokes.
+Minor Mode Key Bindings
+-----------------------
+
+There are far more functions than key bindings. The most used functions are
+bound to the following keystrokes.
 
 Current Key bindings
 
