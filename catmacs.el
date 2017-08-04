@@ -273,12 +273,12 @@ Sets the LED_LEVEL and TFT_LEVEL brightness level."
 ;; ED
 ;;
 
-(defun catmacs-ed-set (encorder steps)
-  "ED - Set - Encorder Down.
-Sets Main/Sub/Multi ENCORDER down by STEPS"
-  (interactive "nEncorder (0-main, 1-sub, 2-multi): \nnSteps: ")
+(defun catmacs-ed-set (encoder steps)
+  "ED - Set - Encoder Down.
+Sets Main/Sub/Multi ENCODER down by STEPS"
+  (interactive "nEncoder (0-main, 1-sub, 2-multi): \nnSteps: ")
   (let (cmd)
-    (setq cmd (format "ED%1d%02d;" encorder steps))
+    (setq cmd (format "ED%1d%02d;" encoder steps))
     (catmacs-send-serial cmd)
     )
   )
@@ -288,12 +288,12 @@ Sets Main/Sub/Multi ENCORDER down by STEPS"
 ;; EU
 ;;
 
-(defun catmacs-eu-set (encorder steps)
-  "EU - Set - Encorder Up.
-Sets Main/Sub/Multi ENCORDER up by STEPS"
-  (interactive "nEncorder (0-main, 1-sub, 2-multi): \nnSteps: ")
+(defun catmacs-eu-set (encoder steps)
+  "EU - Set - Encoder Up.
+Sets Main/Sub/Multi ENCODER up by STEPS"
+  (interactive "nEncoder (0-main, 1-sub, 2-multi): \nnSteps: ")
   (let (cmd)
-    (setq cmd (format "EU%1d%02d;" encorder steps))
+    (setq cmd (format "EU%1d%02d;" encoder steps))
     (catmacs-send-serial cmd)
     )
   )
