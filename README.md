@@ -111,3 +111,72 @@ catmacs-up-set
   Command: UP - Set - Microphone UP.
 
 ```
+
+
+When you run the *catmacs-test* command (M-x catmacs-test), a small subset of
+the API is executed. This does not enable the TX, only RX mode is used.
+
+Here is an example of the *messages* logged during the test.
+
+```
+catmacs: process = [rig]
+catmacs: process = [rig] command = [DA000215;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: process = [rig]
+catmacs: process = [rig] command = [RA00;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: process = [rig]
+catmacs: process = [rig] command = [AG0050;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: Setting frequency to 1377 kHz and mode to AM
+catmacs: process = [rig]
+catmacs: process = [rig] command = [MD05;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: process = [rig]
+catmacs: process = [rig] command = [FA001377000;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: Setting frequency to 531 kHz
+catmacs: process = [rig]
+catmacs: process = [rig] command = [FA000531000;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: Setting frequency to 15 MHz, mode to USB, RF Attenuator ON
+catmacs: process = [rig]
+catmacs: process = [rig] command = [MD02;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: process = [rig]
+catmacs: process = [rig] command = [FA015000000;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: process = [rig]
+catmacs: process = [rig] command = [RA01;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: Setting RF Attenuator OFF
+catmacs: process = [rig]
+catmacs: process = [rig] command = [RA00;]
+catmacs: CAT response = []
+catmacs: process response = []
+catmacs: process = [rig]
+catmacs: process = [rig] command = [FA;]
+catmacs: CAT response = [FA015000000;]
+catmacs: process response = [FA015000000;]
+catmacs: VFO-A Frequency = 1500000 Hz
+catmacs: process = [rig]
+catmacs: process = [rig] command = [DA000100;]
+catmacs: CAT response = []
+catmacs: process response = []
+
+```
+
+Work is ongoing, but the API is usable for now. Its great to be developing in
+Emacs and be able to tune around the band at the same time, with just a few
+keystrokes. TX and data modes may come later...
+
+73's de vk3fcs/km5ws
