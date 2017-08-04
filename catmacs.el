@@ -498,7 +498,7 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 ;; This example shows both interactive and non-interactive
 ;; functions. Still thinking about this. Low level API should
 ;; be non interactive ideally, and then we can build interactive function on top
-;; of that ?
+;; of that.
 
 ;;
 ;; RA
@@ -620,18 +620,24 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   )
 
 ;;
-;; catmacs key bindings, awesome "C-c m" is free.
+;; Minor Mode
 ;;
-(global-set-key (kbd "C-c m f") 'catmacs-fa-set)
-(global-set-key (kbd "C-c m m") 'catmacs-md-set)
-(global-set-key (kbd "C-c m q") 'catmacs-qr-set)
-(global-set-key (kbd "C-c m e d") 'catmacs-ed-set)
-(global-set-key (kbd "C-c m e u") 'catmacs-eu-set)
-(global-set-key (kbd "C-c m a") 'catmacs-ra-set)
-(global-set-key (kbd "C-c m l") 'catmacs-lk-set)
-(global-set-key (kbd "C-c m b") 'catmacs-bs-set)
-(global-set-key (kbd "C-c m v") 'catmacs-ag-set)
-(global-set-key (kbd "C-c m s") 'catmacs-sv-set)
+
+(define-minor-mode catmacs-mode
+  "CAT client for Yaesu FT991A Transceiver"
+  :lighter " catmacs"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c m f") 'catmacs-fa-set)
+            (define-key map (kbd "C-c m m") 'catmacs-md-set)
+            (define-key map (kbd "C-c m q") 'catmacs-qr-set)
+            (define-key map (kbd "C-c m e d") 'catmacs-ed-set)
+            (define-key map (kbd "C-c m e u") 'catmacs-eu-set)
+            (define-key map (kbd "C-c m a") 'catmacs-ra-set)
+            (define-key map (kbd "C-c m l") 'catmacs-lk-set)
+            (define-key map (kbd "C-c m b") 'catmacs-bs-set)
+            (define-key map (kbd "C-c m v") 'catmacs-ag-set)
+            (define-key map (kbd "C-c m s") 'catmacs-sv-set)
+            map) )
 
 
 (provide 'catmacs)
