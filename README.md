@@ -1,9 +1,9 @@
 catmacs
 =======
 
-This is an extension to Emacs to support control of **Yaesu FT991(A) Transceivers.**
+This is an extension to Emacs to support **CAT** control of **Yaesu Transceivers.**
 
-Currently a work in progress, but quite usable.
+Currently a work in progress, but quite usable. Initial focus is on FT991(A) Transceiver.
 
 Output from M-x a catmacs
 
@@ -190,8 +190,8 @@ Current Key bindings
     C-c m b - Set Band Select
     C-c m v - Set AF Gain (Volume)
     C-c m s - Swap VFO
-    C-c m u - Set Encoder Up
-    C-c m d - Set Encoder Down
+    C-c m e u - Set Encoder Up
+    C-c m e d - Set Encoder Down
 
 
 Work is ongoing, but the API is usable for now. Its great to be developing in
