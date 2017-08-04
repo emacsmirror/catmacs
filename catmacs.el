@@ -1,4 +1,4 @@
-;;; catmacs.el --- Simple CAT interface for Yaesu FT991A
+;;; catmacs.el --- Simple CAT interface for Yaesu Transceivers.
 
 ;;
 ;; Copyright (C) 2017 Frank Singleton
@@ -29,8 +29,8 @@
 ;;; Commentary:
 
 ;;
-;; Provides a client for controlling Yaesu FT991A Transceiver using CAT protocol.
-;;
+;; Provides a client for controlling Yaesu Transceivers using CAT protocol.
+;; Initial capability supports FT-991(A)
 ;;
 ;; Basic CAT functions work, including ...
 ;;
@@ -52,7 +52,7 @@
 
 
 (defgroup catmacs nil
-  "CAT client for Yaesu FT-991A."
+  "CAT client for Yaesu Transceivers."
   :prefix "catmacs-"
   :group 'applications)
 
