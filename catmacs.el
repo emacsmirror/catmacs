@@ -129,7 +129,7 @@ for details."
 (defun catmacs-ag-set (gain)
   "AF - Set - AF GAIN (0-255)."
   (interactive "nAF Gain (0-255): ")
-  (catmacs-send-serial (format "AG0%03d;" gain))
+  (catmacs-ag-set-ni 0 gain)
   )
 
 (defun catmacs-ag-set-ni (p1 p2)
@@ -204,9 +204,13 @@ for details."
       (_ (setq p1 12))
       )
     (message "catmacs: p1 = %s" p1)
-    (setq cmd (format "BS%02d;" p1))
-    (catmacs-send-serial cmd)
+    (catmacs-bs-set-ni p1)
     )
+  )
+
+(defun catmacs-bs-set-ni (p1)
+  "BS - Set - Band Select P1."
+  (catmacs-send-serial (format "BS%02d;" p1))
   )
 
 ;;
@@ -216,7 +220,12 @@ for details."
 (defun catmacs-bu-set ()
   "BU - Set - Band Up."
   (interactive)
-  (catmacs-send-serial "BU0;"))
+  (catmacs-bu-set-ni 0)
+  )
+
+(defun catmacs-bu-set-ni (p1)
+  "BU - Set - Band Up P1."
+  (catmacs-send-serial (format "BU%1d;" p1)))
 
 ;;
 ;; CH
@@ -235,12 +244,13 @@ Sets the memory channel up or down."
       ;; default is up
       (_ (setq p1 0))
       )
-    (message "catmacs: %s" p1)
-    (setq cmd (format "CH%1d;" p1))
-    (catmacs-send-serial cmd)
+    (catmacs-ch-set-ni p1)
     )
   )
 
+(defun catmacs-ch-set-ni (p1)
+  "CH - Set - Channel Up/Down P1."
+  (catmacs-send-serial (format "CH%1d;" p1)))
 
 ;;
 ;; DA
@@ -250,11 +260,14 @@ Sets the memory channel up or down."
   "DA - Set - Dimmer.
 Sets the LED_LEVEL and TFT_LEVEL brightness level."
   (interactive "nLED Level (1-2): \nnTFT Level (0-15): ")
-  (let (cmd)
-    (setq cmd (format "DA00%02d%02d;" led_level tft_level))
-    (catmacs-send-serial cmd)
-    )
+  (catmacs-da-set-ni 0 led_level tft_level)
   )
+
+(defun catmacs-da-set-ni (p1 p2 p3)
+  "DA - Set - Dimmer P1 P2 P3."
+  (catmacs-send-serial (format "DA%02d%02d%02d;" p1 p2 p3))
+  )
+
 
 
 ;;
@@ -277,12 +290,13 @@ Sets the LED_LEVEL and TFT_LEVEL brightness level."
   "ED - Set - Encoder Down.
 Sets Main/Sub/Multi ENCODER down by STEPS"
   (interactive "nEncoder (0-main, 1-sub, 2-multi): \nnSteps: ")
-  (let (cmd)
-    (setq cmd (format "ED%1d%02d;" encoder steps))
-    (catmacs-send-serial cmd)
-    )
+  (catmacs-ed-set encoder steps)
   )
 
+(defun catmacs-ed-set-ni (p1 p2)
+  "ED - Set - Encoder Down P1 P2."
+  (catmacs-send-serial (format "ED%1d%02d;" p1 p2))
+  )
 
 ;;
 ;; EU
@@ -298,6 +312,10 @@ Sets Main/Sub/Multi ENCODER up by STEPS"
     )
   )
 
+(defun catmacs-eu-set-ni (p1 p2)
+  "EU - Set - Encoder Up P1 P2."
+  (catmacs-send-serial (format "EU%1d%02d;" p1 p2))
+  )
 
 ;;
 ;; FA
