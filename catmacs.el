@@ -480,6 +480,32 @@ Sets the state of the VFO-A Dial Lock."
   )
 
 ;;
+;; NR
+;;
+
+(defun catmacs-nr-set ()
+  "Set Noise Reduction STATUS."
+  (interactive)
+  (let (cmd choice p1 p2)
+    (setq choice (completing-read "Noise Reduction: " '("on" "off")))
+    (message "catmacs: choice = [%s]" choice)
+    (pcase choice
+      ('"on" (setq p2 1))
+      ('"off" (setq p2 0))
+      ;; default is off
+      (_ (setq p2 0))
+      )
+    (setq p1 0)
+    (catmacs-nr-set-ni p1 p2)
+    )
+  )
+
+(defun catmacs-nr-set-ni (p1 p2)
+  "NR - Set - Noise Reduction - P1 P2."
+  (catmacs-send-serial (format "NR%1d%1d;" p1 p2))
+  )
+
+;;
 ;; QR
 ;;
 
@@ -531,15 +557,28 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
 (defun catmacs-rg-set (gain)
   "RG - Set - RF GAIN."
   (interactive "nRF Gain (0-255): ")
-  (let (cmd)
-    (setq cmd (format "RG0%03d;" gain))
-    (catmacs-send-serial cmd)
-    )
+  (catmacs-rg-set-ni 0 gain)
   )
 
 (defun catmacs-rg-set-ni (p1 p2)
   "RG - Set - RF GAIN P1 P2."
   (catmacs-send-serial (format "RG%1d%03d;" p1 p2))
+  )
+
+
+;;
+;; RL
+;;
+(defun catmacs-rl-set (level)
+  "RG - Set - NOISE REDUCTION LEVEL."
+  (interactive "nNoise Reduction Level (1-15): ")
+  (catmacs-rl-set-ni 0 level)
+  )
+
+
+(defun catmacs-rl-set-ni (p1 p2)
+  "RG - Set - RL P1 P2."
+  (catmacs-send-serial (format "RL%1d%02d;" p1 p2))
   )
 
 ;;
@@ -610,6 +649,13 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
   (message "catmacs: Setting RF Attenuator OFF")
   (catmacs-ra-set-ni 0 0)
   (sleep-for 5)
+  (message "catmacs: Setting noise reduction to 15 then 1")
+  (catmacs-nr-set-ni 0 1)
+  (catmacs-rl-set-ni 0 15)
+  (sleep-for 5)
+  (catmacs-rl-set-ni 0 1)
+  (sleep-for 5)
+  (catmacs-nr-set-ni 0 0)
   ;;
   ;; Sample Read commands
   ;;
@@ -637,6 +683,10 @@ Sets QMB Recall command.  This cycles through the 5 QMB memories."
             (define-key map (kbd "C-c m b") 'catmacs-bs-set)
             (define-key map (kbd "C-c m v") 'catmacs-ag-set)
             (define-key map (kbd "C-c m s") 'catmacs-sv-set)
+            (define-key map (kbd "C-c m i u") 'catmacs-up-set)
+            (define-key map (kbd "C-c m i d") 'catmacs-dn-set)
+            (define-key map (kbd "C-c m n b") 'catmacs-nb-set)
+            (define-key map (kbd "C-c m n l") 'catmacs-nl-set)
             map) )
 
 
