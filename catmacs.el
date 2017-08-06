@@ -166,7 +166,12 @@ for details."
 (defun catmacs-bd-set ()
   "BD - Set - Band Down."
   (interactive)
-  (catmacs-send-serial "BD0;"))
+  (catmacs-bd-set-ni 0)
+  )
+
+(defun catmacs-bd-set-ni (p1)
+  "BD - Set - Band Down P1."
+  (catmacs-send-serial (format "BD%1d;" p1)))
 
 ;;
 ;; BS
@@ -276,10 +281,12 @@ Sets the LED_LEVEL and TFT_LEVEL brightness level."
 (defun catmacs-dn-set ()
   "DN - Set - Microphone Down."
   (interactive)
-  (let (cmd)
-    (setq cmd (format "DN;"))
-    (catmacs-send-serial cmd)
-    )
+  (catmacs-dn-set-ni)
+  )
+
+(defun catmacs-dn-set-ni ()
+  "DN - Set - Microphone Down."
+  (catmacs-send-serial "DN;")
   )
 
 ;;
@@ -323,7 +330,7 @@ Sets Main/Sub/Multi ENCODER up by STEPS"
 
 (defun catmacs-fa-set (frequency)
   "FA - Set - Frequency VFO-A.
-Sets the FREQUENCY (Hz) of VFO-A"
+Sets the FREQUENCY (kHz) of VFO-A"
   (interactive "nVFO-A Frequency: ")
   (let (cmd)
     (setq cmd (format "FA%09d;" (* 1000 frequency)))
@@ -365,12 +372,14 @@ Sets the state of the VFO-A Fast Key."
       ;; default is off
       (_ (setq p1 0))
       )
-    (message "catmacs: %s" p1)
-    (setq cmd (format "FS%1d;" p1))
-    (catmacs-send-serial cmd)
+    (catmacs-fs-set-ni p1)
     )
   )
 
+(defun catmacs-fs-set-ni (p1)
+  "FS - Set - Fast Step P1."
+  (catmacs-send-serial (format "FS%1d;" p1))
+  )
 
 ;;
 ;; IF
@@ -382,12 +391,16 @@ Sets the state of the VFO-A Fast Key."
   "IF - Read - Information.
 Reads information from the radio."
   (interactive)
-  (let (cmd response)
-    (setq cmd (format "IF;"))
-    (setq response (catmacs-send-serial cmd))
+  (let (response)
+    (setq response (catmacs-if-read-ni))
     (message "catmacs: information [%s]" response)
     (substring response 2 -1)
     )
+  )
+
+(defun catmacs-if-read-ni ()
+  "IF - Read - Information."
+  (catmacs-send-serial "IF;")
   )
 
 ;;
@@ -407,12 +420,14 @@ Sets the state of the VFO-A Dial Lock."
       ;; default is off
       (_ (setq p1 0))
       )
-    (message "catmacs: %s" p1)
-    (setq cmd (format "LK%1d;" p1))
-    (catmacs-send-serial cmd)
+    (catmacs-lk-set-ni p1)
     )
   )
 
+(defun catmacs-lk-set-ni (p1)
+  "LK - Set - Lock P1."
+  (catmacs-send-serial (format "LK%1d;" p1))
+  )
 
 ;;
 ;; MD
@@ -477,11 +492,18 @@ Sets the state of the VFO-A Dial Lock."
       (_ (setq p2 0))
       )
     (setq p1 0)
-    (message "catmacs: p1 = %s" p1)
-    (message "catmacs: p2 = %s" p2)
-    (setq cmd (format "NB%1d%1d" p1 p2))
-    (catmacs-send-serial cmd)
+    (catmacs-nb-set-ni p1 p2)
     )
+  )
+
+(defun catmacs-nb-set-ni (p1 p2)
+  "NB - Set - Noise Blanker - P1 P2."
+  (catmacs-send-serial (format "NB%1d%1d;" p1 p2))
+  )
+
+(defun catmacs-nb-read-ni (p1)
+  "NB - Read - Noise Blanker - P1."
+  (catmacs-send-serial (format "NB%1d;" p1))
   )
 
 ;;
@@ -489,12 +511,19 @@ Sets the state of the VFO-A Dial Lock."
 ;;
 
 (defun catmacs-nl-set (level)
-  "Set Noise Blanker LEVEL."
+  "NL - Set - Noise Blanker LEVEL."
   (interactive "nNoise Blanker Level (0-10): ")
-  (let (cmd)
-    (setq cmd (format "NL0%03d;" level))
-    (catmacs-send-serial cmd)
-    )
+  (catmacs-nl-set-ni 0 level)
+  )
+
+(defun catmacs-nl-set-ni (p1 p2)
+  "NL - Set - Noise Blanker Level - P1 P2."
+  (catmacs-send-serial (format "NL%1d%03d;" p1 p2))
+  )
+
+(defun catmacs-nl-read-ni (p1)
+  "NL - Read - Noise Blanker Level - P1."
+  (catmacs-send-serial (format "NL%1d;" p1))
   )
 
 ;;
@@ -523,20 +552,27 @@ Sets the state of the VFO-A Dial Lock."
   (catmacs-send-serial (format "NR%1d%1d;" p1 p2))
   )
 
+(defun catmacs-nr-read-ni (p1)
+  "NR - Read - Noise Reduction - P1."
+  (catmacs-send-serial (format "NR%1d;" p1))
+  )
+
 ;;
 ;; QR
 ;;
 
 (defun catmacs-qr-set ()
   "QR - Set - QMB recall.
-Sets QMB Recall command.  This cycles through the 5 QMB memories."
+Sets QMB Recall command.  Repetitive invocation cycles through the 5 QMB
+memories."
   (interactive)
-  (let (cmd)
-    (setq cmd (format "QR;" ))
-    (catmacs-send-serial cmd)
-    )
+  (catmacs-qr-set-ni)
   )
 
+(defun catmacs-qr-set-ni ()
+  "NR - Set - QMB Recall."
+  (catmacs-send-serial "QR;")
+  )
 
 ;;
 ;; This example shows both interactive and non-interactive
