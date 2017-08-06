@@ -558,6 +558,33 @@ Sets the state of the VFO-A Dial Lock."
   )
 
 ;;
+;; PA
+;;
+(defun catmacs-pa-set ()
+  "Set - Pre-Amp (IPO)."
+  (interactive)
+  (let (cmd choice p1 p2)
+    (setq choice (completing-read "Pre-Amp (IPO): " '("IPO" "AMP1" "AMP2")))
+    (message "catmacs: choice = [%s]" choice)
+    (pcase choice
+      ('"IPO" (setq p2 0))
+      ('"AMP1" (setq p2 1))
+      ('"AMP2" (setq p2 2))
+      ;; default is IPO
+      (_ (setq p2 0))
+      )
+    (setq p1 0)
+    (catmacs-pa-set-ni p1 p2)
+    )
+  )
+
+
+(defun catmacs-pa-set-ni (p1 p2)
+  "PA - Set - Pre-Amp (IPO) - P1 P2."
+  (catmacs-send-serial (format "PA%1d%1d;" p1 p2))
+  )
+
+;;
 ;; QR
 ;;
 
@@ -710,6 +737,14 @@ memories."
   (catmacs-rl-set-ni 0 1)
   (sleep-for 5)
   (catmacs-nr-set-ni 0 0)
+  (message "catmacs: Setting Pre-Amp IPO -> AMP1 -> AMP2")
+  (catmacs-pa-set-ni 0 0)
+  (sleep-for 5)
+  (catmacs-pa-set-ni 0 1)
+  (sleep-for 5)
+  (catmacs-pa-set-ni 0 2)
+  (sleep-for 5)
+
   ;;
   ;; Sample Read commands
   ;;
@@ -741,6 +776,7 @@ memories."
             (define-key map (kbd "C-c m i d") 'catmacs-dn-set)
             (define-key map (kbd "C-c m n b") 'catmacs-nb-set)
             (define-key map (kbd "C-c m n l") 'catmacs-nl-set)
+            (define-key map (kbd "C-c m p") 'catmacs-pa-set)
             map) )
 
 
