@@ -11,18 +11,18 @@ You may have to install VCP drivers from here.
 
 https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
 
-This provides the USB to UART functionality for talking over USB to the FT-991(A)
+This provides CP210x USB to UART Bridge Virtual COM Port (VCP) drivers.
 
 On my mac, it provides 2 entries under **/dev**
 
-``` emacs-lisp
+```
 /dev/tty.SLAB_USBtoUART
 /dev/tty.SLAB_USBtoUART1
 ```
 
 The first is used for **CAT** communications. The second entry (may have
 different suffix) is used for audio. For example, I use **Audacity** for
-listening and for digital modes **FlDigi**
+listening and for digital modes **Fldigi**
 
 Install
 -------
@@ -239,6 +239,6 @@ Emacs and be able to tune around the band at the same time, with just a few
 keystrokes. TX and data modes may come later...
 
 See also a write-up on [my blog](https://singletonresearch.com/2017/08/07/yaesu-ft-991a-cat-control-using-emacs-lisp/) along with
-a few screenshots of **catmacs** in action.
+a few screenshots of **catmacs** Minor Mode in action.
 
 73's de vk3fcs/km5ws
