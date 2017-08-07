@@ -345,11 +345,15 @@ Sets the FREQUENCY (kHz) of VFO-A"
   "FA - Read - Frequency VFO-A.
 Reads the FREQUENCY (Hz) of VFO-A"
   (interactive)
-  (let (cmd response)
-    (setq cmd (format "FA;"))
-    (setq response (catmacs-send-serial cmd))
+  (let (response)
+    (setq response (catmacs-fa-read-ni))
     (string-to-number (substring response 2 -2))
     )
+  )
+
+(defun catmacs-fa-read-ni ()
+  "FA - Read - Frequency VFO-A."
+  (catmacs-send-serial "FA;")
   )
 
 ;;
