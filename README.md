@@ -5,6 +5,18 @@ This is an extension to Emacs to support **CAT** control of **Yaesu Transceivers
 
 Currently a work in progress, but quite usable. Initial focus is on FT991(A) Transceiver.
 
+Install
+-------
+
+To install **catmacs** type the following.
+
+``` emacs-lisp
+M-x package-install RET catmacs RET
+```
+
+Catmacs Functions
+-----------------
+
 Output from M-x a catmacs
 
 ```
@@ -110,7 +122,8 @@ catmacs-up-set
 
 ```
 
-
+Test
+----
 When you run the *catmacs-test* command (M-x catmacs-test), a small subset of
 the API is executed. This does not enable the TX, only RX mode is used.
 
