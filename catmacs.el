@@ -777,6 +777,8 @@ memories."
             (define-key map (kbd "C-c m i d") 'catmacs-dn-set)
             (define-key map (kbd "C-c m n b") 'catmacs-nb-set)
             (define-key map (kbd "C-c m n l") 'catmacs-nl-set)
+            (define-key map (kbd "C-c m r s") 'catmacs-nr-set)
+            (define-key map (kbd "C-c m r l") 'catmacs-rl-set)
             (define-key map (kbd "C-c m p") 'catmacs-pa-set)
             map) )
 

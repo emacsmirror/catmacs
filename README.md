@@ -5,6 +5,25 @@ This is an extension to Emacs to support **CAT** control of **Yaesu Transceivers
 
 Currently a work in progress, but quite usable. Initial focus is on FT991(A) Transceiver.
 
+Driver Requirements
+-------------------
+You may have to install VCP drivers from here.
+
+https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
+
+This provides the USB to UART functionality for talking over USB to the FT-991(A)
+
+On my mac, it provides 2 entries under **/dev**
+
+``` emacs-lisp
+/dev/tty.SLAB_USBtoUART
+/dev/tty.SLAB_USBtoUART1
+```
+
+The first is used for **CAT** communications. The second entry (may have
+different suffix) is used for audio. For example, I use **Audacity** for
+listening and for digital modes **FlDigi**
+
 Install
 -------
 
@@ -191,7 +210,7 @@ Minor Mode Key Bindings
 -----------------------
 
 There are far more functions than key bindings. The most used functions are
-bound to the following keystrokes.
+bound to the following keystrokes in **catmacs** minor mode.
 
 Current Key bindings
 
@@ -205,6 +224,14 @@ Current Key bindings
     C-c m s - Swap VFO
     C-c m e u - Set Encoder Up
     C-c m e d - Set Encoder Down
+    C-c m i d - Set Microphone Step Up
+    C-c m i u - Set Microphone Step down
+    C-c m n b - Set Noise Blanker On/Off
+    C-c m n l - Set Noise Blanker Level
+    C-c m r s - Set Noise Reduction On/Off
+    C-c m r l - Set Noise Reduction Level
+    C-c m p - Set Pre-Amplifier
+
 
 
 Work is ongoing, but the API is usable for now. Its great to be developing in
