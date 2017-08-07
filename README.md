@@ -238,4 +238,7 @@ Work is ongoing, but the API is usable for now. Its great to be developing in
 Emacs and be able to tune around the band at the same time, with just a few
 keystrokes. TX and data modes may come later...
 
+See also a write-up on [my blog](https://singletonresearch.com/2017/08/07/yaesu-ft-991a-cat-control-using-emacs-lisp/) along with
+a few screenshots of **catmacs** in action.
+
 73's de vk3fcs/km5ws
