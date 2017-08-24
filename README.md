@@ -33,6 +33,12 @@ To install **catmacs** type the following.
 M-x package-install RET catmacs RET
 ```
 
+Alternatively, to load catmacs.el without installing into your emacs directory (or using package manager), just issue the following command from inside emacs.
+
+``` text
+M-x load-file RET /path/to/catmacs.el RET
+```
+
 Catmacs Functions
 -----------------
 
