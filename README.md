@@ -24,12 +24,29 @@ The first is used for **CAT** communications. The second entry (may have
 different suffix) is used for audio. For example, I use **Audacity** for
 listening and for digital modes **Fldigi**
 
+Define Prefix
+-------------
+
+So we do not clobber existing key prefixes, first you set the required prefix as follows
+in your emacs customization file. I like **C-c m** (**c**at**m**acs) but you may like something else.
+
+
+``` text
+;;
+;; catmacs key map prefix, change to suit.
+;;
+(global-set-key (kbd "C-c m") 'catmacs-keymap)
+
+```
+
+
+
 Install
 -------
 
 To install **catmacs** type the following.
 
-``` emacs-lisp
+``` text
 M-x package-install RET catmacs RET
 ```
 
