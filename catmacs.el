@@ -758,32 +758,31 @@ memories."
 ;;
 ;; Minor Mode
 ;;
-;; FIXME: Decide on mode prefix strategy
-;;
-(defvar catmacs-prefix "C-c m")
 
 (define-minor-mode catmacs-mode
   "CAT client for Yaesu FT991(A) Transceiver"
   :lighter " catmacs"
   :keymap (let ((catmacs-keymap (make-sparse-keymap)))
+            ;; prefix command
+            (define-prefix-command 'catmacs-keymap)
             ;; keys
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "f")) 'catmacs-fa-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "m")) 'catmacs-md-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "q")) 'catmacs-qr-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "e d")) 'catmacs-ed-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "e u")) 'catmacs-eu-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "a")) 'catmacs-ra-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "l")) 'catmacs-lk-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "b")) 'catmacs-bs-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "v")) 'catmacs-ag-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "s")) 'catmacs-sv-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "i u")) 'catmacs-up-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "i d")) 'catmacs-dn-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "n b")) 'catmacs-nb-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "n l")) 'catmacs-nl-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "r s")) 'catmacs-nr-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "r l")) 'catmacs-rl-set)
-            (define-key catmacs-keymap (kbd (concat catmacs-prefix "p")) 'catmacs-pa-set)
+            (define-key catmacs-keymap (kbd "f") 'catmacs-fa-set)
+            (define-key catmacs-keymap (kbd "m") 'catmacs-md-set)
+            (define-key catmacs-keymap (kbd "q") 'catmacs-qr-set)
+            (define-key catmacs-keymap (kbd "e d") 'catmacs-ed-set)
+            (define-key catmacs-keymap (kbd "e u") 'catmacs-eu-set)
+            (define-key catmacs-keymap (kbd "a") 'catmacs-ra-set)
+            (define-key catmacs-keymap (kbd "l") 'catmacs-lk-set)
+            (define-key catmacs-keymap (kbd "b") 'catmacs-bs-set)
+            (define-key catmacs-keymap (kbd "v") 'catmacs-ag-set)
+            (define-key catmacs-keymap (kbd "s") 'catmacs-sv-set)
+            (define-key catmacs-keymap (kbd "i u") 'catmacs-up-set)
+            (define-key catmacs-keymap (kbd "i d") 'catmacs-dn-set)
+            (define-key catmacs-keymap (kbd "n b") 'catmacs-nb-set)
+            (define-key catmacs-keymap (kbd "n l") 'catmacs-nl-set)
+            (define-key catmacs-keymap (kbd "r s") 'catmacs-nr-set)
+            (define-key catmacs-keymap (kbd "r l") 'catmacs-rl-set)
+            (define-key catmacs-keymap (kbd "p") 'catmacs-pa-set)
             catmacs-keymap)
   )
 
