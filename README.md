@@ -265,6 +265,8 @@ See also a write-up on [my blog](https://singletonresearch.com/2017/08/07/yaesu-
 a few screenshots of **catmacs** Minor Mode in action.
 
 
+The latest release is always available on Melpa.
+
 [![MELPA](https://melpa.org/packages/catmacs-badge.svg)](https://melpa.org/#/catmacs)
 
 
