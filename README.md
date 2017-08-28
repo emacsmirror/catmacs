@@ -264,4 +264,8 @@ keystrokes. TX and data modes may come later...
 See also a write-up on [my blog](https://singletonresearch.com/2017/08/07/yaesu-ft-991a-cat-control-using-emacs-lisp/) along with
 a few screenshots of **catmacs** Minor Mode in action.
 
+
+[![MELPA](https://melpa.org/packages/catmacs-badge.svg)](https://melpa.org/#/catmacs)
+
+
 73's de vk3fcs/km5ws
